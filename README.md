@@ -11,16 +11,11 @@ This project demonstrates bidirectional communication between a **Laptop**, a **
 
 Bidirectional-Communication/
 │
-├── RaspberryPi/
-│   ├── raspberry_pi_script.py    # Python script for Raspberry Pi to handle communication with Arduino
-│
-├── Arduino/
-│   ├── arduino_code.ino         # Arduino code for receiving commands and blinking LED
-│
-├── Laptop/
-│   ├── laptop_script.py         # Python script for sending data from the Laptop to Raspberry Pi
-│
-└── README.md                    # Project documentation
+├── raspberry_pi_script.py       # Python script for Raspberry Pi to handle communication with Arduino
+├── arduino_code.ino            # Arduino code for receiving commands and blinking LED
+├── laptop_script.py            # Python script for sending data from the Laptop to Raspberry Pi
+└── README.md                   # Project documentation
+
 
 
 ## Setup Instructions
