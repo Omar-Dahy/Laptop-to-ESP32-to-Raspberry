@@ -9,18 +9,19 @@ This project demonstrates bidirectional communication between a **Laptop**, a **
 - **Arduino Uno**: Receives commands, performs actions (e.g., blinking an LED), and sends feedback to the Raspberry Pi.
 - **LED**: Attached to the Arduino, blinks based on the commands received.
 
-/Bidirectional-Communication
+Bidirectional-Communication/
 │
-├── /RaspberryPi
-│   ├── raspberry_pi_script.py  # Python script for Raspberry Pi to handle communication with Arduino
+├── RaspberryPi/
+│   ├── raspberry_pi_script.py    # Python script for Raspberry Pi to handle communication with Arduino
 │
-├── /Arduino
-│   ├── arduino_code.ino        # Arduino code for receiving commands and blinking LED
+├── Arduino/
+│   ├── arduino_code.ino         # Arduino code for receiving commands and blinking LED
 │
-├── /Laptop
-│   ├── laptop_script.py        # Python script for sending data from the Laptop to Raspberry Pi
+├── Laptop/
+│   ├── laptop_script.py         # Python script for sending data from the Laptop to Raspberry Pi
 │
-└── README.md                   # Project documentation
+└── README.md                    # Project documentation
+
 
 ## Setup Instructions
 
