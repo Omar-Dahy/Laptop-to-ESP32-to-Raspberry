@@ -1,27 +1,38 @@
+import socket
 import serial
-import time
 
-# Set up serial connection to Arduino (adjust port as necessary)
-arduino = serial.Serial('/dev/ttyUSB0', 9600)  # Update port if needed
-time.sleep(2)  # Allow time for the serial connection to initialize
+# Set up serial connection to ESP32 (adjust port as necessary)
+arduino = serial.Serial('/dev/ttyUSB0', 9600)
 
-# Function to send data to Arduino and get response
-def send_data_to_arduino(data):
-    arduino.write(data.encode())  # Send the data to Arduino
-    print(f"Sent data to Arduino: {data}")
-    
-    # Wait for Arduino's response
-    while arduino.in_waiting == 0:
-        time.sleep(0.1)  # Wait for response from Arduino
-    
-    feedback = arduino.readline().decode().strip()  # Read feedback from Arduino
-    return feedback
+# Set up the server
+host = '0.0.0.0'
+port = 12345
 
-# Main loop to send and receive data
-while True:
-    data = input("Enter command for Arduino (AA/BB): ")
-    if data in ["AA", "BB"]:
-        feedback = send_data_to_arduino(data)  # Send data and get feedback
-        print(f"Feedback from Arduino: {feedback}")
-    else:
-        print("Invalid command. Please enter 'AA' or 'BB'.")
+# Create socket and listen for data
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((host, port))
+    s.listen(1)
+    print("Listening for connection...")
+
+    conn, addr = s.accept()
+    with conn:  # Only close when you're truly done
+        print(f"Connection established with {addr}")
+
+        while True:
+            # Receive data from the laptop
+            data = conn.recv(1024).decode()
+            if data:
+                print(f"Received data: {data}")
+
+                # Send data to ESP32
+                arduino.write(data.encode())
+                print(f"Sent data to ESP32: {data}")
+
+                # Wait for feedback from ESP32
+                if arduino.in_waiting > 0:
+                    feedback = arduino.readline().decode().strip()
+                    print(f"Received feedback from ESP32: {feedback}")
+
+                    # Send feedback back to the laptop
+                    conn.sendall(feedback.encode())
+                    print(f"Sent feedback to Laptop: {feedback}")
