@@ -6,7 +6,7 @@ This project demonstrates bidirectional communication between a **Laptop**, a **
 ## Components Used
 - **Laptop**: Running a Python script to send and receive data.
 - **Raspberry Pi**: Acts as an intermediary, forwarding commands from the Laptop to the ESP32.
-- **ESP32 Uno**: Receives commands, performs actions (e.g., blinking an LED), and sends feedback to the Raspberry Pi.
+- **ESP32 **: Receives commands, performs actions (e.g., blinking an LED), and sends feedback to the Raspberry Pi.
 - **LED**: Attached to the ESP32, blinks based on the commands received.
 
 ## Setup Instructions
@@ -28,7 +28,7 @@ This project demonstrates bidirectional communication between a **Laptop**, a **
 
 2. **Upload ESP32 Code**:
    - Open the `ESP32_code.ino` file in the **ESP32 IDE**.
-   - Select your **ESP32 Uno** board and upload the code.
+   - Select your **ESP32 ** board and upload the code.
 
 3. **Run Raspberry Pi Script**:
    - On the **Raspberry Pi**, run the `raspberry_pi_script.py` to listen for incoming commands from the Laptop and send them to the ESP32.
