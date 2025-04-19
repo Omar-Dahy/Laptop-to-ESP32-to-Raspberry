@@ -1,27 +1,15 @@
-import serial
-import time
+import socket
 
-# Set up serial communication with Raspberry Pi (using a USB cable)
-arduino = serial.Serial('/dev/ttyUSB0', 9600)  # Update the port as needed
-time.sleep(2)  # Wait for the serial connection to establish
+# Specify the Raspberry Pi IP and port
+host = '192.168.1.2'  # Raspberry Pi IP
+port = 12345  # Port for communication
 
-# Function to send data to Arduino and get response
-def send_data_to_arduino(data):
-    arduino.write(data.encode())  # Send the data to Arduino
-    print(f"Sent data to Arduino: {data}")
-    
-    # Wait for Arduino's response
-    while arduino.in_waiting == 0:
-        time.sleep(0.1)  # Wait for response from Arduino
-    
-    feedback = arduino.readline().decode().strip()  # Read feedback from Arduino
-    return feedback
+# Create the socket
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((host, port))
 
-# Main loop to send and receive data
-while True:
-    data = input("Enter command for Arduino (AA/BB): ")
-    if data in ["AA", "BB"]:
-        feedback = send_data_to_arduino(data)  # Send data and get feedback
-        print(f"Feedback from Arduino: {feedback}")
-    else:
-        print("Invalid command. Please enter 'AA' or 'BB'.")
+    while True:
+        data = input("Input command (AA for 5 blinks, BB for 10): ")
+
+        s.sendall(data.encode())  # Send data to Raspberry Pi
+        print(f"Sent data: {data}")
