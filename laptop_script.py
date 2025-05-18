@@ -13,3 +13,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
         s.sendall(data.encode())  # Send data to Raspberry Pi
         print(f"Sent data: {data}")
+
+        # Receive feedback from Raspberry Pi
+        #feedback = s.recv(1024).decode()  # Receive feedback
+        #print(f"Received feedback from Raspberry Pi: {feedback}")
